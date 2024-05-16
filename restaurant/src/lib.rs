@@ -14,11 +14,21 @@ mod front_of_house {
     }
 }
 
+// use crate::front_of_house::hosting;
+pub use crate::front_of_house::hosting;
+
 pub fn eat_at_restaurant() {
     // Absolute path
     crate::front_of_house::hosting::add_to_waitlist();
     // Relative path
     front_of_house::hosting::add_to_waitlist();
+    hosting::add_to_waitlist();
+
+    mod customer {
+        pub fn eat_at_restaurant() {
+            super::hosting::add_to_waitlist();
+        }
+    }
 
     let mut meal = back_of_house::Breakfast::summer("Rye");
     meal.toast = String::from("Wheat");
@@ -60,3 +70,29 @@ mod back_of_house {
     }
 }
 
+// use std::fmt;
+// use std::io;
+// fn function1() -> fmt::Result {
+// }
+//
+// fn function2() -> io::Result<()> {
+// }
+
+// use std::fmt::Result;
+// use std::io::Result as IoResult;
+// fn function3() -> Result {
+// }
+//
+// fn function4() -> IoResult<()> {
+// }
+
+use std::{
+    cmp::Ordering,
+    any,
+};
+use std::io::{
+    self,
+    Write
+};
+
+use std::collections::*;
